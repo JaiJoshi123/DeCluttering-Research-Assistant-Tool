@@ -1,0 +1,3 @@
+# DeCluttering Research Assistant Tool
+
+This project has been implemented in pursuit of facilitating the consumption of information with increased coherency and efficiency, leading to a proliferation in productivity in the fields of both professional and informal research using an easy-to-use web-based dashboard, the project works in 3 broad tenets. BERT Algorithm (Bidirectional Encoder Representations from Transformers) for information summarization, followed by Latent Dirichlet allocation (LDA) Algorithm for text classification and Collaborative filtering for recommending further articles for the user’s knowledge expansion.

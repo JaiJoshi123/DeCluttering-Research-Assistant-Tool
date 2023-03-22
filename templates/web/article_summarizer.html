@@ -1,0 +1,70 @@
+{% extends "web/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Article Summarizer</h1>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+    <div class="col">
+        {% if not summary %}
+            <form method="POST" action="{% url 'article_summarizer' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-user"
+                        placeholder="Enter Article Link" name="URL" id="URL">
+                        
+                </div>
+                <button type="submit" class="btn btn-primary btn-user btn-block">
+                    Summarize Article
+                </button>
+            </form>
+            <hr>
+            <div class="row justify-content-center">
+                <h2>OR</h2>
+            </div>
+            <hr>
+            <form method="POST" action="{% url 'article_summarizer_2' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-user"
+                        placeholder="Enter Article Title" name="title" id="title">
+                        
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" class="form-control form-control-user"
+                        placeholder="Enter Article Content" name="content" id="content"></textarea>
+                        
+                </div>
+                <button type="submit" class="btn btn-primary btn-user btn-block">
+                    Summarize Article
+                </button>
+            </form>
+        {% else %}
+            <h2 class="h4 mb-0 text-gray-1000">Extracted Title: {{ title }}</h2>
+            <p>{{ summary }}</p>
+            <form action="{% url 'add_article' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="{{ summary }}" name="summary" id="summary">
+                <input type="hidden" value="{{ title }}" name="title" id="title">
+                {% if URL %}
+                    <input type="hidden" value="{{ URL }}" name="URL" id="URL">
+                {% endif %}
+                <button href="#" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span class="text">Add Article</span>
+                </button>
+                <a href="{% url 'article_summarizer' %}" class="btn btn-info">Back</a>
+            </form>
+            
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock body%}

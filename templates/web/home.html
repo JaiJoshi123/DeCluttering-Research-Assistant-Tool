@@ -1,0 +1,14 @@
+{% if user.is_authenticated %}
+  Hi {{ user.email }}! User_id: {{ user.user_id_no }}, is_new: {{ user.is_new }}
+  
+  <ul>
+    {% for a in articles %}
+        <li>{{ a.article_id }}</li>
+    {% endfor %}
+  </ul>
+  <p><a href="{% url 'account_logout' %}">Log Out</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'account_login' %}">Log In</a> |
+  <a href="{% url 'account_signup' %}">Sign Up</a>
+{% endif %}
